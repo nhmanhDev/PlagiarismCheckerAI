@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.python-version
+.env
+.venv
+.env*
+.git
+.gitignore
+node_modules
+.cache
+.idea
+.vscode
+**/.DS_Store

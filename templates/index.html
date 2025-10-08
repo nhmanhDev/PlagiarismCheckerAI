@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+	<div class="container">
+		<h1>🧐 AI Plagiarism Checker</h1>
+		<p><small>Thiết bị: <strong>{{ device | default('cpu') | upper }}</strong></small></p>
+
+		<footer>
+			<hr />
+			<small>
+				Chế độ: Hybrid Retrieval (BM25 + Semantic)
+			</small>
+		</footer>
+	</div>
+
+	<script>
+	// Classifier nhanh tạm ẩn
+
+	// --- Hybrid Retrieval UI ---
+	// Add dynamic section for corpus and hybrid checking
+	(function setupHybrid() {
+		const container = document.querySelector('.container');
+		const hybridHtml = `
+			<section>
+				<h2>📚 Thiết lập kho tham chiếu (Corpus)</h2>
+				<form id="corpus-form" method="post" action="/api/hybrid_set_corpus">
+					<div class="field">
+						<label for="corpus">Dán văn bản/kho tham chiếu (các đoạn gốc)</label>
+						<textarea id="corpus" name="corpus" rows="10" placeholder="Dán các đoạn văn bản nguồn, có thể nhiều đoạn." required></textarea>
+					</div>
+					<div class="field">
+						<label for="split_mode">Cách tách đoạn</label>
+						<select id="split_mode" name="split_mode">
+							<option value="auto" selected>Auto (câu)</option>
+							<option value="sentence">Câu</option>
+							<option value="paragraph">Đoạn</option>
+						</select>
+					</div>
+					<button type="submit">Lập chỉ mục corpus</button>
+				</form>
+				<div id="corpus-status" style="display:none" class="result">
+					<p><strong>Trạng thái:</strong> Đã lập chỉ mục <span id="num-segments">0</span> segment(s). Thiết bị: <span id="device-name">—</span></p>
+				</div>
+			</section>
+
+			<section>
+				<h2>🔎 Kiểm tra đạo văn kiểu Hybrid</h2>
+				<form id="hybrid-form" method="post" action="/api/hybrid_check">
+					<div class="field">
+						<label for="query_text">Văn bản nghi ngờ</label>
+						<textarea id="query_text" name="query_text" rows="8" placeholder="Dán đoạn nghi ngờ…" required></textarea>
+					</div>
+					<div class="field">
+						<label>Tham số</label>
+						<div style="display:grid;grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px;">
+							<label>alpha (kết hợp): <input type="number" step="0.05" min="0" max="1" name="alpha" value="0.4" /></label>
+							<label>top_k_lex: <input type="number" min="1" name="top_k_lex" value="10" /></label>
+							<label>top_k_sem: <input type="number" min="1" name="top_k_sem" value="10" /></label>
+							<label>top_n: <input type="number" min="1" name="top_n" value="5" /></label>
+							<label>threshold: <input type="number" step="0.01" min="0" max="1" name="threshold" value="0.75" /></label>
+						</div>
+					</div>
+					<button type="submit">Chạy Hybrid Retrieval</button>
+				</form>
+				<div id="hybrid-results" style="display:none" class="result">
+					<h3>Kết quả Hybrid</h3>
+					<pre id="hybrid-meta"></pre>
+					<div id="hybrid-table"></div>
+				</div>
+			</section>
+		`;
+		const wrapper = document.createElement('div');
+		wrapper.innerHTML = hybridHtml;
+		container.appendChild(wrapper);
+
+		const corpusForm = document.getElementById('corpus-form');
+		const corpusStatus = document.getElementById('corpus-status');
+		const numSegEl = document.getElementById('num-segments');
+		const deviceNameEl = document.getElementById('device-name');
+
+		corpusForm.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const fd = new FormData(corpusForm);
+			try {
+				const res = await fetch('/api/hybrid_set_corpus', { method: 'POST', body: fd });
+				if (!res.ok) throw new Error(await res.text());
+				const data = await res.json();
+				numSegEl.textContent = String(data.num_segments ?? 0);
+				deviceNameEl.textContent = String(data.device ?? '—').toUpperCase();
+				corpusStatus.style.display = 'block';
+			} catch (err) {
+				alert('Lỗi lập chỉ mục corpus: ' + String(err));
+			}
+		});
+
+		const hybridForm = document.getElementById('hybrid-form');
+		const hybridBox = document.getElementById('hybrid-results');
+		const hybridMeta = document.getElementById('hybrid-meta');
+		const hybridTable = document.getElementById('hybrid-table');
+
+		hybridForm.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const fd = new FormData(hybridForm);
+			try {
+				const res = await fetch('/api/hybrid_check', { method: 'POST', body: fd });
+				if (!res.ok) throw new Error(await res.text());
+				const data = await res.json();
+				hybridMeta.textContent = JSON.stringify({ alpha: data.alpha, threshold: data.threshold, device: data.device }, null, 2);
+				const confirmations = {};
+				(data.confirmations || []).forEach(c => { confirmations[c.index] = c; });
+				const rows = (data.results || []).map((r, i) => {
+					return `
+						<tr>
+							<td>${i+1}</td>
+							<td>${r.score_final.toFixed(3)}</td>
+							<td>${r.score_lexical_raw.toFixed(3)}</td>
+							<td>${r.score_semantic_raw.toFixed(3)}</td>
+								<td>${r.is_suspected ? '1' : '0'}</td>
+							<td><pre style="white-space:pre-wrap;margin:0">${r.text}</pre></td>
+						</tr>`;
+				}).join('');
+				hybridTable.innerHTML = `
+					<table style="width:100%; border-collapse: collapse;">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Score (final)</th>
+								<th>BM25 (raw)</th>
+								<th>Semantic (raw)</th>
+								<th>Nghi ngờ</th>
+								<th>Đoạn văn</th>
+								
+							</tr>
+						</thead>
+						<tbody>${rows}</tbody>
+					</table>`;
+				hybridBox.style.display = 'block';
+			} catch (err) {
+				alert('Lỗi hybrid check: ' + String(err));
+			}
+		});
+	})();
+	</script>
+</body>
+</html>
