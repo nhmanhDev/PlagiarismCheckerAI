@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: plagiarism-backend:latest
+    container_name: plagiarism-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - corpus-data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CORPUS_STORAGE_DIR=/app/data/corpora
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/api/v1/system/status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - plagiarism-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: plagiarism-frontend:latest
+    container_name: plagiarism-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - plagiarism-network
+
+networks:
+  plagiarism-network:
+    driver: bridge
+
+volumes:
+  corpus-data:
+    driver: local

@@ -1,16 +1,57 @@
-__pycache__
-*.pyc
-*.pyo
-*.pyd
+# .dockerignore - Optimized for smaller images
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
 *.swp
-.python-version
-.env
-.venv
-.env*
-.git
+*.swo
+*~
+
+# Git
+.git/
 .gitignore
-node_modules
-.cache
-.idea
-.vscode
-**/.DS_Store
+
+# Documentation (not needed in container)
+*.md
+!README.md
+docs/
+
+# Tests
+tests/
+test_*.py
+
+# Data (will be mounted as volumes)
+data/corpora/*
+data/experiments/*
+data/temp/*
+
+# Artifacts directory (user artifacts, not needed)
+.gemini/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*_backup.py
+*_old.py
+app_integration.py
+
+# Logs
+*.log
+logs/

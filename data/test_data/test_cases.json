@@ -1,0 +1,155 @@
+{
+    "test_cases": [
+        {
+            "id": 1,
+            "query": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "source": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "label": 1,
+            "similarity": 1.0,
+            "type": "exact_copy",
+            "description": "Sao chép nguyên văn"
+        },
+        {
+            "id": 2,
+            "query": "Machine learning thuộc lĩnh vực AI, chú trọng đến việc phát triển các hệ thống tự động học hỏi từ dữ liệu.",
+            "source": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "label": 1,
+            "similarity": 0.85,
+            "type": "paraphrase",
+            "description": "Diễn đạt lại với từ đồng nghĩa"
+        },
+        {
+            "id": 3,
+            "query": "Trí tuệ nhân tạo bao gồm nhiều lĩnh vực, trong đó machine learning là một phần quan trọng giúp máy tính tự học.",
+            "source": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "label": 1,
+            "similarity": 0.75,
+            "type": "restructured",
+            "description": "Thay đổi cấu trúc câu"
+        },
+        {
+            "id": 4,
+            "query": "Python là ngôn ngữ lập trình phổ biến nhất hiện nay, được sử dụng rộng rãi trong phát triển web và khoa học dữ liệu.",
+            "source": "Python là ngôn ngữ lập trình phổ biến nhất hiện nay, được sử dụng rộng rãi trong phát triển web và khoa học dữ liệu.",
+            "label": 1,
+            "similarity": 1.0,
+            "type": "exact_copy",
+            "description": "Sao chép nguyên văn"
+        },
+        {
+            "id": 5,
+            "query": "Ngôn ngữ Python hiện đang rất được ưa chuộng, đặc biệt trong các ứng dụng web development và data science.",
+            "source": "Python là ngôn ngữ lập trình phổ biến nhất hiện nay, được sử dụng rộng rãi trong phát triển web và khoa học dữ liệu.",
+            "label": 1,
+            "similarity": 0.80,
+            "type": "paraphrase",
+            "description": "Paraphrase với từ tiếng Anh"
+        },
+        {
+            "id": 6,
+            "query": "Deep learning sử dụng mạng neural nhiều lớp để học các đặc trưng phức tạp từ dữ liệu thô.",
+            "source": "Deep learning sử dụng mạng neural nhiều lớp để học các đặc trưng phức tạp từ dữ liệu thô.",
+            "label": 1,
+            "similarity": 1.0,
+            "type": "exact_copy",
+            "description": "Sao chép nguyên văn"
+        },
+        {
+            "id": 7,
+            "query": "Học sâu ứng dụng các mạng nơ-ron đa tầng nhằm trích xuất các tính năng phức tạp từ dữ liệu ban đầu.",
+            "source": "Deep learning sử dụng mạng neural nhiều lớng để học các đặc trưng phức tạp từ dữ liệu thô.",
+            "label": 1,
+            "similarity": 0.82,
+            "type": "paraphrase",
+            "description": "Việt hóa thuật ngữ"
+        },
+        {
+            "id": 8,
+            "query": "Xử lý ngôn ngữ tự nhiên là lĩnh vực nghiên cứu giúp máy tính hiểu và xử lý ngôn ngữ con người.",
+            "source": "Xử lý ngôn ngữ tự nhiên là lĩnh vực nghiên cứu giúp máy tính hiểu và xử lý ngôn ngữ con người.",
+            "label": 1,
+            "similarity": 1.0,
+            "type": "exact_copy",
+            "description": "Sao chép nguyên văn"
+        },
+        {
+            "id": 9,
+            "query": "NLP là một ngành khoa học máy tính tập trung vào việc cho phép máy tính hiểu được ngôn ngữ tự nhiên của con người.",
+            "source": "Xử lý ngôn ngữ tự nhiên là lĩnh vực nghiên cứu giúp máy tính hiểu và xử lý ngôn ngữ con người.",
+            "label": 1,
+            "similarity": 0.78,
+            "type": "paraphrase",
+            "description": "Paraphrase với viết tắt"
+        },
+        {
+            "id": 10,
+            "query": "Hôm nay trời đẹp, nắng vàng rực rỡ. Tôi dự định sẽ đi dạo công viên vào buổi chiều.",
+            "source": "Python là ngôn ngữ lập trình phổ biến nhất hiện nay, được sử dụng rộng rãi trong phát triển web và khoa học dữ liệu.",
+            "label": 0,
+            "similarity": 0.05,
+            "type": "unrelated",
+            "description": "Hoàn toàn không liên quan"
+        },
+        {
+            "id": 11,
+            "query": "Tôi rất thích ăn phở bò, đặc biệt là phở Hà Nội với nước dùng trong vắt.",
+            "source": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "label": 0,
+            "similarity": 0.03,
+            "type": "unrelated",
+            "description": "Hoàn toàn không liên quan"
+        },
+        {
+            "id": 12,
+            "query": "JavaScript là ngôn ngữ lập trình được sử dụng chủ yếu trong phát triển web front-end.",
+            "source": "Python là ngôn ngữ lập trình phổ biến nhất hiện nay, được sử dụng rộng rãi trong phát triển web và khoa học dữ liệu.",
+            "label": 0,
+            "similarity": 0.45,
+            "type": "related_not_plagiarism",
+            "description": "Liên quan về chủ đề nhưng không phải đạo văn"
+        },
+        {
+            "id": 13,
+            "query": "Computer vision giúp máy tính có khả năng nhìn và phân tích hình ảnh như con người.",
+            "source": "Xử lý ngôn ngữ tự nhiên là lĩnh vực nghiên cứu giúp máy tính hiểu và xử lý ngôn ngữ con người.",
+            "label": 0,
+            "similarity": 0.50,
+            "type": "related_not_plagiarism",
+            "description": "Cấu trúc tương tự nhưng nội dung khác"
+        },
+        {
+            "id": 14,
+            "query": "Trí tuệ nhân tạo đang thay đổi nhiều ngành công nghiệp, từ y tế đến tài chính.",
+            "source": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "label": 0,
+            "similarity": 0.40,
+            "type": "related_not_plagiarism",
+            "description": "Cùng topic AI nhưng khác nội dung"
+        },
+        {
+            "id": 15,
+            "query": "Thuật toán học máy có thể được chia thành ba loại chính: học có giám sát, học không giám sát và học tăng cường.",
+            "source": "Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.",
+            "label": 0,
+            "similarity": 0.55,
+            "type": "related_not_plagiarism",
+            "description": "Mở rộng topic nhưng không đạo văn"
+        }
+    ],
+    "metadata": {
+        "total_cases": 15,
+        "plagiarism_cases": 9,
+        "non_plagiarism_cases": 6,
+        "types": {
+            "exact_copy": 4,
+            "paraphrase": 4,
+            "restructured": 1,
+            "unrelated": 2,
+            "related_not_plagiarism": 4
+        },
+        "language": "Vietnamese",
+        "domain": "Computer Science / AI",
+        "created": "2026-01-04",
+        "version": "1.0"
+    }
+}

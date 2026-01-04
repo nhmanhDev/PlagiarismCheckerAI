@@ -1,0 +1,30 @@
+Học máy là một nhánh của trí tuệ nhân tạo, tập trung vào việc xây dựng các hệ thống có khả năng học từ dữ liệu.
+Python là ngôn ngữ lập trình phổ biến nhất hiện nay, được sử dụng rộng rãi trong phát triển web và khoa học dữ liệu.
+Deep learning sử dụng mạng neural nhiều lớp để học các đặc trưng phức tạp từ dữ liệu thô.
+Xử lý ngôn ngữ tự nhiên là lĩnh vực nghiên cứu giúp máy tính hiểu và xử lý ngôn ngữ con người.
+Trí tuệ nhân tạo đang thay đổi cách chúng ta sống và làm việc trong thời đại số.
+Mạng neural tích chập được sử dụng rộng rãi trong xử lý ảnh và computer vision.
+Học tăng cường cho phép agent học cách đưa ra quyết định thông qua tương tác với môi trường.
+Big data đòi hỏi các công cụ và kỹ thuật mới để lưu trữ, xử lý và phân tích.
+Cloud computing cung cấp tài nguyên tính toán linh hoạt và có thể mở rộng qua Internet.
+Blockchain là công nghệ sổ cái phân tán, đảm bảo tính bảo mật và minh bạch cho các giao dịch.
+Học có giám sát sử dụng dữ liệu có nhãn để huấn luyện mô hình dự đoán.
+Học không giám sát tìm kiếm các mẫu và cấu trúc ẩn trong dữ liệu không có nhãn.
+Transfer learning cho phép sử dụng kiến thức từ một bài toán để giải quyết bài toán khác.
+Overfitting xảy ra khi mô hình học quá chi tiết từ dữ liệu huấn luyện và không khái quát hóa tốt.
+Regularization là kỹ thuật được sử dụng để giảm overfitting trong machine learning.
+Data augmentation tăng kích thước và đa dạng của tập dữ liệu huấn luyện.
+Gradient descent là thuật toán tối ưu hóa phổ biến nhất trong deep learning.
+Backpropagation là phương pháp tính gradient hiệu quả cho mạng neural.
+Recurrent neural networks (RNN) thích hợp cho xử lý dữ liệu tuần tự như văn bản và âm thanh.
+Long Short-Term Memory (LSTM) giải quyết vấn đề gradient vanishing trong RNN truyền thống.
+Attention mechanism cho phép mô hình tập trung vào các phần quan trọng của đầu vào.
+Transformer architecture đã cách mạng hóa xử lý ngôn ngữ tự nhiên.
+BERT là mô hình ngôn ngữ pre-trained dựa trên kiến trúc Transformer.
+GPT sử dụng kiến trúc Transformer decoder-only để sinh văn bản.
+Fine-tuning điều chỉnh mô hình pre-trained cho các tác vụ cụ thể.
+Tokenization là quá trình chia văn bản thành các đơn vị nhỏ hơn như từ hoặc ký tự.
+Word embeddings biểu diễn từ dưới dạng vector trong không gian nhiều chiều.
+Similarity search tìm kiếm các đối tượng tương tự dựa trên khoảng cách trong không gian embedding.
+Cosine similarity đo độ tương tự giữa hai vector dựa trên góc giữa chúng.
+Euclidean distance đo khoảng cách thẳng giữa hai điểm trong không gian.
