@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
+import { ChatPanel } from '../components/ChatPanel';
 import { plagiarismService } from '../services/plagiarismService';
 import type { CheckResponse } from '../types';
 
@@ -261,6 +262,16 @@ export default function CheckPage() {
                     </Card>
                 </div>
             </div>
+
+            {/* AI Chat Panel - Full Width Below Results */}
+            {results && (
+                <div className="mt-8">
+                    <ChatPanel
+                        queryText={useFileUpload && selectedFile ? selectedFile.name : queryText}
+                        detectionResults={results}
+                    />
+                </div>
+            )}
         </div>
     );
 }
